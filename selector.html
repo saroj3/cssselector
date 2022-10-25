@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>selector.html</title>
+    <style>
+      /* 要素の強調のためのCSS指定 */
+      .highlight {
+        background-color: lightblue;
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>KCGI Master Project</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>略称</th>
+          <th>指導教授</th>
+          <th>学生数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CRM</td>
+          <td>高　弘昇</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>DWH</td>
+          <td>寺下　陽一</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>ANM</td>
+          <td>植田　浩二</td>
+          <td>14</td>
+        </tr>
+        <tr>
+          <td>SCM</td>
+          <td>今井　恒雄</td>
+          <td>6</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <!-- ここにセレクタ文字列を入力し「強調」ボタンを押す -->
+    選択対象：<input type="text" size="30" id="selector" />
+    <button type="button" onclick="getText()">強調</button>
+
+    <script>
+      /**
+       * セレクタで指定したDOM要素にclass="highlight"の属性を与える
+       */
+      function highlight() {
+        $("*").removeClass("highlight"); // 前回実行時の選択を解除する
+        var str = $("#selector").val();
+        $(str).addClass("highlight");
+      }
+
+      function getText() {
+        let text = document.getElementById("selector").value;
+        let tbody = document.getElementsByTagName("tbody")[0];
+        let tablevalue = tbody.getElementsByTagName("tr");
+        console.log(tablevalue);
+        for (const subject of tablevalue) {
+          let value = subject.getElementsByTagName("td")[0].innerHTML;
+          if (value == text) {
+            subject.style.backgroundColor = "red";
+          } else {
+            subject.style.backgroundColor = "white";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
